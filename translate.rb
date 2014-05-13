@@ -1,0 +1,3 @@
+class Translate
+  
+end
