@@ -9,31 +9,37 @@ module YamlHelper
     include TranslateApi
     
     def write_to_file(data)
-      File.open FILE, "w+" do |file|
+      File.open FILE, "a+" do |file|
         file.write data.to_yaml
       end
     end
 
     def read_file
       file = File.read FILE
-      result = YAML::load file
+      result = YAML.load file
+      result || []
     end
     
     def add_new_word(word)
-      tr = Translator.new
-      result = tr.get_data word
+      data = []
+      file_data = read_file
 
-      write_to_file result
-    end
-
+      puts file_data
+      
+      translate = Translator.new
+      result = translate.get_data word
+      data.push(result)
+      write_to_file data
+    end 
+  
   end
 
 
 a = FileRedactor.new
 
-puts a.add_new_word("tennis")
- 
-puts a.read_file
+a.add_new_word("girl")
+
+
 
 end
 
