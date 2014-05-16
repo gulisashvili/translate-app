@@ -13,19 +13,19 @@ module FileHelper
     
     def write_to_file(data)
       File.open FILE, "a+" do |file|
-        file.write data.to_yaml
+        file.write(data.to_yaml)
       end
     end
 
     def read_file
-      file = File.read FILE
-      result = YAML.load_stream file || []
+      file = File.read(FILE)
+      result = YAML.load_stream(file) || []
     end
 
     def save_translated_to_file(word)
       translate = Translator.new
       translate.get_data(word) do |data|
-        write_to_file data
+        write_to_file(data)
         data
       end
     end
@@ -34,7 +34,7 @@ module FileHelper
       if matched
         puts "already Exists"
       else
-        save_translated_to_file word
+        save_translated_to_file(word)
       end
     end
     

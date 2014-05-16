@@ -10,7 +10,7 @@ module CommandHelper
 
     def get_translate_result(word)
       result = FileRedactor.new
-      result.add_new_word word
+      result.add_new_word(word)
     end
 
     def command_play
@@ -20,7 +20,9 @@ module CommandHelper
       puts "---- SUCCESS ----"
       puts "---- #{answer} ----"
       puts "---- LOADING ---- "
+      
       puts get_translate_result(answer)
+      
       puts "---- FINISHED ---- "
     end
 
